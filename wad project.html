@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatrandom</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #80deea);
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: transparent;
+            width: 100%;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-family: 'Garamond', serif;
+            color: #333;
+        }
+
+        header h1 {
+            font-size: 36px;
+            font-family: 'Palatino', serif;
+            color: #000;
+            margin: 10px 0;
+            background: none;
+        }
+
+        nav {
+            margin: 10px 0;
+            text-align: right;
+            width: 100%;
+            padding-right: 20px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #054976;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #145064;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            display: none;
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-form input {
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            background-color: #145064;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #f8f5f5;
+            color: #000;
+        }
+
+        #loginStatus {
+            margin-top: 10px;
+            font-weight: bold;
+            color: green;
+        }
+
+        #status {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#home" id="navHome">Home</a>
+    <a href="#about" id="navAbout">About</a>
+    <a href="#why" id="navWhy">Why Chatrandom</a>
+    <a href="#join" id="navJoin">Join Chat</a>
+    <a href="#login" id="navLogin">Login</a>
+</nav>
+
+<header>
+    <div class="logo">Chatrandom</div>
+    <h1>Video Chat Application</h1>
+</header>
+
+<div id="home" class="container">
+    <h2>Welcome to Chatrandom</h2>
+    <p>Connect with random users from around the world for engaging video conversations.</p>
+</div>
+
+<div id="about" class="container">
+    <h2>About Chatrandom</h2>
+    <p>Chatrandom is a free video chat platform that connects you with random users from all over the globe.</p>
+</div>
+
+<div id="why" class="container">
+    <h2>Why Chatrandom?</h2>
+    <p>Chatrandom offers a unique experience by allowing you to meet and chat with strangers worldwide.</p>
+</div>
+
+<div id="join" class="container">
+    <h2>Join Chat</h2>
+    <p>Click below to start chatting with random users. No sign-up required!</p>
+    <button id="loginButton">Start Chat</button>
+</div>
+
+<div id="login" class="container">
+    <h2>Login</h2>
+    <form id="loginForm" class="login-form">
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <input type="password" id="password" placeholder="Enter your password" required>
+        <button type="submit">Join Chat</button>
+    </form>
+    <p id="loginStatus"></p>
+</div>
+
+<div id="videoChat" class="container">
+    <h2>Video Chat</h2>
+    <div id="video-container">
+        <video id="localVideo" autoplay muted></video>
+        <video id="remoteVideo" autoplay></video>
+    </div>
+    <button id="startButton">Start Video Chat</button>
+    <button id="endButton" class="hidden">End Video Chat</button>
+    
+    <div id="chatContainer">
+        <h3>Chat</h3>
+        <div id="messages"></div>
+        <input type="text" id="chatInput" placeholder="Type your message..." />
+        <button id="sendButton">Send</button>
+    </div>
+    
+    <p id="status"></p>
+</div>
+
+<script>
+    const homeContainer = document.getElementById('home');
+    const aboutContainer = document.getElementById('about');
+    const whyContainer = document.getElementById('why');
+    const joinContainer = document.getElementById('join');
+    const loginContainer = document.getElementById('login');
+    const videoChatContainer = document.getElementById('videoChat');
+
+    const startButton = document.getElementById('startButton');
+    const endButton = document.getElementById('endButton');
+    const statusText = document.getElementById('status');
+    const localVideo = document.getElementById('localVideo');
+    const chatInput = document.getElementById('chatInput');
+    const messagesContainer = document.getElementById('messages');
+    const sendButton = document.getElementById('sendButton');
+
+    // Hide all containers initially
+    [homeContainer, aboutContainer, whyContainer, joinContainer, loginContainer, videoChatContainer].forEach(c => c.style.display = 'none');
+
+    // Navigation
+    document.getElementById('navHome').addEventListener('click', () => showContainer(homeContainer));
+    document.getElementById('navAbout').addEventListener('click', () => showContainer(aboutContainer));
+    document.getElementById('navWhy').addEventListener('click', () => showContainer(whyContainer));
+    document.getElementById('navJoin').addEventListener('click', () => showContainer(joinContainer));
+    document.getElementById('navLogin').addEventListener('click', () => showContainer(loginContainer));
+
+    function showContainer(container) {
+        [homeContainer, aboutContainer, whyContainer, joinContainer, loginContainer, videoChatContainer].forEach(c => c.style.display = 'none');
+        container.style.display = 'block';
+    }
+
+    document.getElementById('loginButton').addEventListener('click', () => {
+        showContainer(loginContainer);
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Simulate authentication logic
+        console.log(`Email: ${email}, Password: ${password}`);
+        
+        // Display login success message
+        document.getElementById('loginStatus').textContent = "Login successful!";
+
+        // Show the video chat container (replace with actual login logic)
+        showContainer(videoChatContainer);
+        startVideoChat();
+    });
+
+    startButton.addEventListener('click', startVideoChat);
+    endButton.addEventListener('click', endVideoChat);
+
+    function startVideoChat() {
+        statusText.textContent = "Video chat started!";
+        startButton.classList.add('hidden');
+        endButton.classList.remove('hidden');
+
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                localVideo.srcObject = stream;
+                localStream = stream;
+            })
+            .catch(err => {
+                console.error("Error accessing media devices.", err);
+            });
+    }
+
+    function endVideoChat() {
+        if (localStream) {
+            localStream.getTracks().forEach(track => track.stop());
+        }
+        statusText.textContent = "Video chat ended.";
+        startButton.classList.remove('hidden');
+        endButton.classList.add('hidden');
+    }
+
+    sendButton.addEventListener('click', () => {
+        const message = chatInput.value;
+        if (message) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            messagesContainer.appendChild(messageElement);
+            chatInput.value = '';
+        }
+    });
+
+    // Show the home container on initial load
+    showContainer(homeContainer);
+</script>
+
+</body>
+</html>

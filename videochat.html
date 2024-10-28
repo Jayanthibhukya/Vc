@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatrandom</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("emojy2.webp") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            height: 100vh; 
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            font-size: 18px;
+        }
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-family: 'Garamond', serif;
+            color: #333;
+        }
+
+        header h1 {
+            font-size: 48px;
+            font-family: 'Palatino', serif;
+            color: #000;
+            margin: 10px 0;
+        }
+
+        nav {
+            margin: 10px 0;
+            text-align: right;
+            width: 100%;
+            padding-right: 20px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #00796b;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #004d40;
+        }
+
+        .container {
+            display: none;
+            width: 90%;
+            font-size: x-large;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #00796b;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form input {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #00796b;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        form button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        form button:hover {
+            background-color: #004d40;
+        }
+
+        #video-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        video {
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #00796b;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #chat-box {
+            width: 100%;
+            max-width: 400px;
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #00796b;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+        }
+
+        #chat-input {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .controls {
+            margin: 10px 0;
+        }
+
+        .controls button {
+            margin: 0 5px;
+        }
+
+        .scroll-container {
+            overflow-y: auto;
+            max-height: 300px;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #00796b;
+            border-radius: 5px;
+        }
+
+        img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#home" onclick="showSection('home')">Home</a>
+    <a href="#about" onclick="showSection('about')">About</a>
+    <a href="#why" onclick="showSection('why')">Why Chatrandom</a>
+    <a href="#join" onclick="showSection('join')">Join Chat</a>
+    <a href="#login" onclick="showSection('login')">Login</a>
+    <a href="#videochat" onclick="showSection('videochat')">Video Chat</a>
+</nav>
+
+<header>
+    <div class="logo">Chatrandom</div>
+    <h1>Video Chat Application</h1>
+</header>
+
+<div id="home" class="container">
+    <h2 style="font-size: 36px;">Welcome to Chatrandom</h2>
+    <p>Chatrandom is your go-to platform for connecting with random users from around the world for engaging video conversations.</p>
+    
+    <h3 class="highlight">Why Choose Us?</h3>
+    <ul>
+        <li><span class="highlight">Instant Connections:</span> Meet new people quickly!</li>
+        <li><span class="highlight">Global Reach:</span> Chat with users from various countries.</li>
+        <li><span class="highlight">Multiple Communication Modes:</span> Text, voice, or video chat.</li>
+        <li><span class="highlight">User-Friendly Interface:</span> Navigate seamlessly.</li>
+    </ul>
+    
+    <h3 class="highlight">How It Works</h3>
+    <p>Simply click on "Join Chat" or "Login" to get started. Once you're in, you can connect with random users immediately.</p>
+    
+    <img src="emogy 5.jpeg" alt="Chatrandom Image" />
+</div>
+
+<div id="about" class="container">
+    <h2 style="font-size: 36px;">About Chatrandom</h2>
+    <p>Chatrandom is a unique platform designed to connect users through random video chats. Our mission is to foster connections across cultures and create an engaging environment for social interaction.</p>
+    
+    <h3 class="highlight">Our Vision</h3>
+    <p>We believe in the power of technology to bring people together. Our platform is built on the principles of openness and connection, allowing individuals to form friendships without barriers.</p>
+    
+    <h3 class="highlight">Key Features</h3>
+    <ul>
+        <li><strong>Random Matchmaking:</strong> Connect with individuals from all around the globe.</li>
+        <li><strong>Privacy Controls:</strong> Enjoy a safe chatting environment with options to block or report users.</li>
+        <li><strong>Fun Filters and Effects:</strong> Make your video chats more exciting!</li>
+        <li><strong>Mobile-Friendly:</strong> Enjoy seamless chatting on any device.</li>
+    </ul>
+
+    <h3 class="highlight">User Experience</h3>
+    <p>Our users report positive experiences, emphasizing the fun and diverse interactions they encounter on Chatrandom.</p>
+    <img src="emogy4.webp" alt="User Experience" />
+</div>
+
+<div id="why" class="container">
+    <h2 style="font-size: 36px;">Why Chatrandom?</h2>
+    <p>Chatrandom is more than just a video chat platform; it is a vibrant community where you can meet new friends, share experiences, and learn about different cultures. Here are some compelling reasons to choose Chatrandom:</p>
+    
+    <h3 class="highlight">Global Reach</h3>
+    <p>With users from all around the globe, Chatrandom provides a unique opportunity to connect with people you would otherwise never meet. Experience conversations with individuals from diverse backgrounds, enriching your understanding of different perspectives.</p>
+
+    <h3 class="highlight">Engaging Interface</h3>
+    <p>Our platform features an intuitive and user-friendly interface that makes navigating your chats simple and enjoyable. Whether you're a tech-savvy user or new to online chatting, you'll find our design appealing and easy to use.</p>
+
+    <h3 class="highlight">Privacy and Security</h3>
+    <p>Your safety is our priority. Chatrandom implements strict privacy controls, allowing you to block or report users if necessary. Enjoy your conversations knowing that you have the power to control your experience.</p>
+    
+    <h3 class="highlight">Fun Filters and Effects</h3>
+    <p>Add some excitement to your chats with our fun filters and effects. Express yourself in unique ways and enhance your conversations!</p>
+    
+    <h3 class="highlight">Join the Chatrandom Community!</h3>
+    <p>Experience the thrill of connecting with strangers in a safe and fun environment. Join Chatrandom today!</p>
+    <img src="emogy3.jpeg" alt="Chatrandom Community" />
+</div>
+
+<div id="join" class="container">
+    <h2 style="font-size: 36px;">Join Chatrandom</h2>
+    <p>To join Chatrandom, please enter your details below:</p>
+    <form id="join-form" onsubmit="handleJoin(event)">
+        <input type="text" id="username" placeholder="Enter your username" required>
+        <button type="submit">Join Chat</button>
+    </form>
+</div>
+
+<div id="login" class="container">
+    <h2 style="font-size: 36px;">Login to Chatrandom</h2>
+    <p>Please enter your login details:</p>
+    <form id="login-form" onsubmit="handleLogin(event)">
+        <input type="text" id="login-username" placeholder="Enter your username" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<div id="videochat" class="container">
+    <h2 style="font-size: 36px;">Video Chat</h2>
+    <div id="video-container">
+        <video id="local-video" autoplay muted></video>
+        <div class="controls">
+            <button id="start-chat" onclick="startChat()">Start Chat</button>
+            <button id="end-chat" onclick="endChat()">End Chat</button>
+        </div>
+    </div>
+    <div id="chat-box" class="scroll-container"></div>
+    <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+    <button id="send-button" onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.container');
+        sections.forEach(section => {
+            section.style.display = 'none';
+        });
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+    function handleJoin(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        alert(`Welcome ${username}! You can now join the chat.`);
+        showSection('videochat');
+        startVideo();
+    }
+
+    function handleLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('login-username').value;
+        alert(`Welcome back ${username}!`);
+        showSection('videochat');
+        startVideo();
+    }
+
+    function startVideo() {
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                document.getElementById('local-video').srcObject = stream;
+            })
+            .catch(error => {
+                console.error("Error accessing media devices.", error);
+                alert("Unable to access your camera/microphone. Please check your settings.");
+            });
+    }
+
+    function startChat() {
+        // Logic to initiate chat with random users
+        alert("Chat started!");
+    }
+
+    function endChat() {
+        // Logic to end chat
+        alert("Chat ended!");
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+
+    function sendMessage() {
+        const messageInput = document.getElementById('chat-input');
+        const message = messageInput.value;
+        if (message.trim() !== '') {
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML += `<div>${message}</div>`;
+            messageInput.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+        }
+    }
+
+    // Show the home section by default
+    showSection('home');
+</script>
+
+</body>
+</html>
